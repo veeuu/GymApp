@@ -119,4 +119,24 @@ class WorkoutPlanService {
     
     return allAssignments;
   }
+
+  // Get workout plan from any trainer (for client access)
+  Future<WorkoutPlan?> getWorkoutPlanFromAnyTrainer(String planId) async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    // Search across all trainers for the plan
+    final keys = prefs.getKeys().where((key) => key.startsWith('workout_plans_')).toList();
+    
+    for (String key in keys) {
+      final plansJson = prefs.getStringList(key) ?? [];
+      for (String planJson in plansJson) {
+        final planMap = jsonDecode(planJson);
+        if (planMap['id'] == planId) {
+          return WorkoutPlan.fromMap(planMap, planId);
+        }
+      }
+    }
+    
+    return null;
+  }
 }

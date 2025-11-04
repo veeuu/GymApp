@@ -9,11 +9,11 @@ import 'utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(const ArjunGymApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ArjunGymApp extends StatelessWidget {
+  const ArjunGymApp({super.key});
 
   @override
   Widget build(BuildContext context) {

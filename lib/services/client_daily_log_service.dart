@@ -215,4 +215,28 @@ class ClientDailyLogService {
       await saveDailyLog(newLog);
     }
   }
+
+  // Alias methods for compatibility with client screens
+  Future<void> logExercise(String clientId, String exerciseId, String exerciseName, int sets, int reps, double? weight) async {
+    final exercise = CompletedExercise(
+      exerciseId: exerciseId,
+      exerciseName: exerciseName,
+      setsCompleted: sets,
+      repsCompleted: reps,
+      weightUsed: weight,
+      durationMinutes: 0, // Default duration
+      completedAt: DateTime.now(),
+    );
+    await addCompletedExercise(clientId, exercise);
+  }
+
+  Future<void> logMeal(String clientId, String mealId, String mealName, int calories, String mealType) async {
+    final meal = ConsumedMeal(
+      mealName: mealName,
+      foods: [], // Empty foods list for now
+      totalCalories: calories,
+      consumedAt: DateTime.now(),
+    );
+    await addConsumedMeal(clientId, meal);
+  }
 }

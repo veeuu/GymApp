@@ -7,11 +7,12 @@ import '../../services/workout_plan_service.dart';
 import '../../services/diet_plan_service.dart';
 import '../../services/debug_service.dart';
 import '../../models/client_daily_log.dart';
-import '../../models/exercise.dart';
-import '../../models/diet_plan.dart';
+
 import 'client_workout_screen.dart';
 import 'client_nutrition_screen.dart';
 import 'client_progress_screen.dart';
+import 'client_workout_detail_screen.dart';
+import 'client_diet_detail_screen.dart';
 
 class ClientDashboardScreen extends StatefulWidget {
   const ClientDashboardScreen({super.key});
@@ -356,7 +357,14 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                                 backgroundColor: Colors.green.withOpacity(0.2),
                               ),
                               onTap: () {
-                                // Navigate to workout screen
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ClientWorkoutDetailScreen(
+                                      assignment: assignment,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           );
@@ -374,7 +382,14 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
                                 backgroundColor: Colors.purple.withOpacity(0.2),
                               ),
                               onTap: () {
-                                // Navigate to nutrition screen
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ClientDietDetailScreen(
+                                      assignment: assignment,
+                                    ),
+                                  ),
+                                );
                               },
                             ),
                           );

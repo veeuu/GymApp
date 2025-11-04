@@ -121,6 +121,26 @@ class DietPlanService {
     return allAssignments;
   }
 
+  // Get diet plan from any trainer (for client access)
+  Future<DietPlan?> getDietPlanFromAnyTrainer(String planId) async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    // Search across all trainers for the plan
+    final keys = prefs.getKeys().where((key) => key.startsWith('diet_plans_')).toList();
+    
+    for (String key in keys) {
+      final plansJson = prefs.getStringList(key) ?? [];
+      for (String planJson in plansJson) {
+        final planMap = jsonDecode(planJson);
+        if (planMap['id'] == planId) {
+          return DietPlan.fromMap(planMap, planId);
+        }
+      }
+    }
+    
+    return null;
+  }
+
   // Common food database
   List<Map<String, dynamic>> getCommonFoods() {
     return [
