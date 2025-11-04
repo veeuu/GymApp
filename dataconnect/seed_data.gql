@@ -1,0 +1,50 @@
+mutation CreateSeedData @transaction @auth(level: PUBLIC, insecureReason: "This operation is used to seed the database with initial data.") {
+  trainer_insertMany(data: [
+    {
+      id: "789e44aa-e8bb-41ca-af74-3f7a06a976bb",
+      displayName: "John Doe",
+      email: "john.doe@example.com",
+      createdAt: "2024-01-24T12:00:00Z"
+    },
+    {
+      id: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      displayName: "Jane Smith",
+      email: "jane.smith@example.com",
+      createdAt: "2024-01-24T13:00:00Z"
+    }
+  ])
+  workoutPlan_insertMany(data: [
+    {
+      id: "11223344-5566-7788-9900-aabbccddeeff",
+      trainerId: "789e44aa-e8bb-41ca-af74-3f7a06a976bb",
+      name: "Full Body Workout",
+      description: "A complete workout plan for the entire body.",
+      createdAt: "2024-01-24T14:00:00Z"
+    },
+    {
+      id: "fedcba98-7654-3210-0fed-cba987654321",
+      trainerId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      name: "Cardio Blast",
+      description: "A high-intensity cardio workout.",
+      createdAt: "2024-01-24T15:00:00Z"
+    }
+  ])
+  client_insertMany(data: [
+    {
+      id: "00112233-4455-6677-8899-aabbccddeeff",
+      trainerId: "789e44aa-e8bb-41ca-af74-3f7a06a976bb",
+      firstName: "Alice",
+      lastName: "Johnson",
+      email: "alice.johnson@example.com",
+      createdAt: "2024-01-24T16:00:00Z"
+    },
+    {
+      id: "ffeeddcc-bbaa-9988-7766-554433221100",
+      trainerId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      firstName: "Bob",
+      lastName: "Williams",
+      email: "bob.williams@example.com",
+      createdAt: "2024-01-24T17:00:00Z"
+    }
+  ])
+}

@@ -1,0 +1,14 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Progress photos - only authenticated trainers can upload/access
+    match /progress/{trainerId}/{clientId}/{fileName} {
+      allow read, write: if request.auth != null && request.auth.uid == trainerId;
+    }
+    
+    // Profile pictures
+    match /profiles/{userId}/{fileName} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
